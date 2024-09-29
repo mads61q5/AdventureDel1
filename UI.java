@@ -5,10 +5,7 @@ import java.util.Scanner;
 
 public class UI {
     Scanner scanner = new Scanner(System.in);
-    String displayUI;
     boolean running = false;
-    Adventure room1 = new Adventure();
-    Room room = new Room();
     private Adventure adventure;
 
     public UI(Adventure adventure) {
@@ -54,20 +51,20 @@ public class UI {
                 String input = scanner.nextLine();
                 switch (input.toLowerCase()) {
                     case "go north":
-                        System.out.println(adventure.move("go north"));
+                        System.out.println(adventure.commands(input));
                         break;
                     case "go south":
-                        System.out.println(adventure.move("go south"));
+                        System.out.println(adventure.commands(input));
                         break;
                     case "go west":
-                        System.out.println(adventure.move("go west"));
+                        System.out.println(adventure.commands(input));
                         break;
                     case "go east":
-                        System.out.println(adventure.move("go east"));
+                        System.out.println(adventure.commands(input));
                         break;
                     case "look":
                         System.out.println("Looking around");
-                        System.out.println(adventure.look());
+                        System.out.println(adventure.commands(input));
                         break;
                     case "exit":
                         System.out.println("Thank you for playing the game!");
