@@ -21,8 +21,16 @@ public class Map {
         Room room8 = new Room("Enchanted treasure room", " Room with glowing armor and weapons that could be used to kill something big ");
         Room room9 = new Room("Mining cell", " Pickaxes and chains lying around");
 
+        Item sword = new Item("Sword", "A long iron sword");
+        Item lamp = new Item("Lamp", "Broken but useful lamp");
+        Item bow = new Item("Bow", "A bow made of elderwood");
+
+
+
         room1.setEast(room2);
         room1.setSouth(room4);
+        room1.addItem(sword);
+        room1.addItem(lamp);
 
         room2.setWest(room1);
         room2.setEast(room3);

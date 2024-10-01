@@ -1,5 +1,8 @@
 package AdventureSpil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
     private String currentRoom;
     private String name;
@@ -8,55 +11,82 @@ public class Room {
     private Room west;
     private Room north;
     private Room south;
+    private ArrayList<Item> items;
 
-    public Room(String name, String description){
-        this.name=name;
-        this.description=description;
-    }
-
-    public Room(){
-
+    public Room(String name, String description) {
+        this.name = name;
+        this.description = description;
+        items = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    public Room() {
+
     }
 
-    public String getDescription() {
-        return description;
-    }
-    public String getCurrentRoom() {
-        return currentRoom;
-    }
-    public void setEast(Room east){
-        this.east = east;
-    }
-    public void setNorth(Room north) {
-        this.north = north;
-    }
-    public void setSouth(Room south) {
-        this.south = south;
-    }
-    public void setWest(Room west) {
-        this.west = west;
-    }
-    public Room getNorth() {
-        return north;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public Room getEast() {
-        return east;
+    public void removeItem(Item item){
+        items.remove(item);
     }
 
-    public Room getSouth() {
-        return south;
+    public String showItems() {
+        if (items.isEmpty()) {
+            return "\nNo items in this room";
+
+        } else {
+            String myitems = "\nItems in this room: \n";
+            for (Item item : items) {
+                myitems += item.getDescription() + " \n";
+            }
+            return myitems;
+        }
     }
 
-    public Room getWest() {
-        return west;
-    }
+        public void addItem (Item item){
+            items.add(item);
+        }
 
-    public String toString(){
-        return "You are in " + name + description;
+        public String getName () {
+            return name;
+        }
+
+        public String getDescription () {
+            return description;
+        }
+        public String getCurrentRoom () {
+            return currentRoom;
+        }
+        public void setEast (Room east){
+            this.east = east;
+        }
+        public void setNorth (Room north){
+            this.north = north;
+        }
+        public void setSouth (Room south){
+            this.south = south;
+        }
+        public void setWest (Room west){
+            this.west = west;
+        }
+        public Room getNorth () {
+            return north;
+        }
+
+        public Room getEast () {
+            return east;
+        }
+
+        public Room getSouth () {
+            return south;
+        }
+
+        public Room getWest () {
+            return west;
+        }
+
+        public String toString () {
+            return "You are in " + name + description;
+        }
     }
-}

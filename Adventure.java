@@ -13,6 +13,18 @@ public class Adventure {
 
     }
 
+    public String take(String item) {
+        return player.takeItem(item);
+    }
+    public String drop(String item) {
+        return player.dropItem(item);
+    }
+
+
+    public String showItems() {
+        return player.showInventory();
+    }
+
     public String commands(String command) {
         switch (command.toLowerCase()) {
             case "go north", "go east", "go west", "go south":
