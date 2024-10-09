@@ -3,11 +3,18 @@ package AdventureSpil;
 public class Item {
     private String name;
     private String description;
+    protected double health;
 
     public Item(String name, String description) {
         this.name=name;
         this.description=description;
 
+    }
+
+    public Item (String name, String description, double health){
+        this.name=name;
+        this.description=description;
+        this.health=health;
     }
 
     public String getDescription() {
@@ -18,11 +25,4 @@ public class Item {
         return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}

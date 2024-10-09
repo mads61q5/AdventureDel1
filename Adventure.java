@@ -1,15 +1,13 @@
 package AdventureSpil;
 
-import java.util.Locale;
-
 public class Adventure {
     private Map map;
     private Player player;
 
 
     public Adventure() {
-        map = new Map();
-        player = new Player(map.getCurrentRoom());
+        this.map = new Map();
+        this.player = new Player(map.getCurrentRoom());
 
     }
 
@@ -46,5 +44,14 @@ public class Adventure {
 
 
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public String attack() {
+        return player.attack();
+    }
+
 }
 

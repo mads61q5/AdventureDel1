@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-    private String currentRoom;
     private String name;
     private String description;
     private Room east;
@@ -19,9 +18,6 @@ public class Room {
         items = new ArrayList<>();
     }
 
-    public Room() {
-
-    }
 
     public List<Item> getItems() {
         return items;
@@ -48,16 +44,6 @@ public class Room {
             items.add(item);
         }
 
-        public String getName () {
-            return name;
-        }
-
-        public String getDescription () {
-            return description;
-        }
-        public String getCurrentRoom () {
-            return currentRoom;
-        }
         public void setEast (Room east){
             this.east = east;
         }
@@ -89,4 +75,12 @@ public class Room {
         public String toString () {
             return "You are in " + name + description;
         }
+
+    public String getName() {
+        return name;
     }
+
+    public String getDescription() {
+        return description;
+    }
+}

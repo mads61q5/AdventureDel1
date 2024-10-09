@@ -11,8 +11,13 @@ public class UI {
 
     public UI(Adventure adventure) {
         this.adventure = adventure;
+        this.player = adventure.getPlayer();
 
     }
+
+    /*public UI(Player player) {
+        this.player = adventure.getPlayer();
+    }*/
 
 
     public void setDisplayUI() {
@@ -46,8 +51,8 @@ public class UI {
             }
 
 
-            System.out.println("You can go North, West, South, East, 'look', 'take[item]', 'drop[item]', 'inventory', 'help', or 'exit'.");
-
+            System.out.println("You can go North, West, South, East, 'look', 'take[item]', 'drop[item]', 'inventory', 'help', 'inventory', 'health', 'eat' or 'exit'.");
+            System.out.println("You can also attack and equip");
             while (running) {
                 String nextRoom = null;
                 String input = scanner.nextLine();
@@ -57,6 +62,16 @@ public class UI {
                 } else if (input.startsWith("drop ")) {
                     String dropItemName = input.substring(5).trim();
                     System.out.println(adventure.drop(dropItemName));
+                } else if (input.equals("health")) {
+                    checkHealth();
+                }else if (input.startsWith("eat")) {
+                    String itemName = input.substring(4).trim();
+                    System.out.println(player.eatItem(itemName));
+                }else if (input.startsWith("equip")) {
+                    String itemName = input.substring(6).trim();
+                    System.out.println(player.equipWeapon(itemName));
+                }else if (input.equalsIgnoreCase("attack")){
+                    System.out.println(adventure.attack());
                 } else if (input.equals("go north")) {
                     System.out.println(adventure.commands("go north"));
                 } else if (input.equals("go south")) {
@@ -82,20 +97,37 @@ public class UI {
             }
         }
     }
-        public void displayHelp () {
-            System.out.println("Help Menu:");
-            System.out.println("Type 'go north' to go north.");
-            System.out.println("Type 'go south' to go south.");
-            System.out.println("Type 'go west' to go west.");
-            System.out.println("Type 'go east' to go east.");
-            System.out.println("Type 'look' to get a description of the current room.");
-            System.out.println("Type 'take' to pick up item.");
-            System.out.println("Type 'drop' to drop item.");
-            System.out.println("Type 'help' to display this help menu.");
-            System.out.println("Type 'exit' to exit the game.");
-        }
 
-
+    public void displayHelp() {
+        System.out.println("Help Menu:");
+        System.out.println("Type 'go north' to go north.");
+        System.out.println("Type 'go south' to go south.");
+        System.out.println("Type 'go west' to go west.");
+        System.out.println("Type 'go east' to go east.");
+        System.out.println("Type 'look' to get a description of the current room.");
+        System.out.println("Type 'take' to pick up item.");
+        System.out.println("Type 'drop' to drop item.");
+        System.out.println("Type 'help' to display this help menu.");
+        System.out.println("Type 'exit' to exit the game.");
     }
+
+    private void checkHealth() {
+        double health = player.getHealth();
+        System.out.println("Health is: " + health);
+            if (health > 75) {
+                System.out.println("Your health is high.");
+            } else if (health >= 50) {
+                System.out.println("Your health is moderate.");
+            } else if (health > 25) {
+                System.out.println("Your health is low.");
+            } else {
+                System.out.println("Your health is critical!");
+            }
+        }
+    }
+
+
+
+
 
 
