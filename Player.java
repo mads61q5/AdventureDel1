@@ -23,16 +23,49 @@ public class Player {
         return equippedWeapon;
     }
 
-    public String attack() {
-        Weapon weapon = getEquippedWeapon();
-
-        if (weapon == null) {
-            return "You don't have any equipped weapon.";
-        } else if (!weapon.isEquipped()) {
-            return "Your weapon needs more ammunition!";
-        } else {
-            return weapon.attack();
+    public void takeDamage(double damage) {
+        this.health -= damage;
+        if(this.health < 0) {
+            this.health = 0;
         }
+        System.out.println("You took " + damage + " damage. Your current health is: " + this.health);
+    }
+
+    public String attack() {
+        if (equippedWeapon == null) {
+            return "You have no weapon equipped!";
+        }
+
+        Enemy enemy = currentRoom.getEnemy();  // Vi antager her, at der kun er én fjende i rummet
+        if (enemy == null) {
+            return "There are no enemies in this room";
+        }
+
+        // Spilleren angriber fjenden
+        double damageDealt = equippedWeapon.getDamage();
+        enemy.takeDamage(damageDealt);
+        String result = "You attacked " + enemy.getName() + " with your weapon " + equippedWeapon.getName() + " dealing " + damageDealt + " damage.\n";
+        result += enemy.getName() + "'s health after your attack is: " + enemy.getHealth() + "\n";
+        if (!enemy.isAlive()) {
+            // Fjenden dør og dropper våbenet
+            result += enemy.getName() + " is dead.\n";
+            Weapon droppedWeapon = enemy.getWeapon();
+            result += enemy.dropWeapon();
+
+            if(droppedWeapon != null) {
+                currentRoom.addItem(droppedWeapon);
+            }
+
+            currentRoom.removeEnemy();
+        } else {
+            // Fjenden slår tilbage
+            double enemyDamage = enemy.getWeapon().getDamage();
+            this.health -= enemyDamage;
+            result += enemy.getName() + " attacked you with " + enemy.getWeapon().getName() + " for " + enemyDamage + " damage.\n";
+        }
+        result += "Your health after the enemy attack is: " + this.getHealth() + "\n";
+
+        return result;
     }
 
 
@@ -169,7 +202,7 @@ public class Player {
                 }
                 if (nextRoom != null) {
                     currentRoom = nextRoom;
-                    return "You are now in " + currentRoom.getName() + ": " + currentRoom.getDescription() + currentRoom.showItems();
+                    return "You are now in " + currentRoom.getName() + ": " + currentRoom.getDescription() + currentRoom.showItems() + currentRoom.showEnemies();
                 } else {
                     return "It is not possible to go that way.";
                 }
@@ -177,7 +210,7 @@ public class Player {
 
 
             public String look () {
-                return "You are in " + currentRoom.getName() + currentRoom.getDescription() + currentRoom.showItems();
+                return "You are in " + currentRoom.getName() + currentRoom.getDescription() + currentRoom.showItems() + currentRoom.showEnemies();
             }
         }
 

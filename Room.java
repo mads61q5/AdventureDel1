@@ -11,11 +11,14 @@ public class Room {
     private Room north;
     private Room south;
     private ArrayList<Item> items;
+    private Enemy enemy;
+    private ArrayList<Enemy> enemies;
 
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
         items = new ArrayList<>();
+        enemies = new ArrayList<>();
     }
 
 
@@ -82,5 +85,29 @@ public class Room {
 
     public String getDescription() {
         return description;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public Enemy getEnemy() {
+        return enemy;
+    }
+
+    public void removeEnemy() {
+        this.enemy = null;
+    }
+
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+    }
+    public String showEnemies() {
+        if (enemy == null) {
+            return "\nNo enemies in this room";
+
+        } else {
+            return "\nEnemies in this room: \n" + enemy.getName() + " (Health: " + enemy.getHealth() + ")";
+        }
     }
 }

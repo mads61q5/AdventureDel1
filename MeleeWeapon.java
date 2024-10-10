@@ -2,8 +2,8 @@ package AdventureSpil;
 
 public class MeleeWeapon extends Weapon{
 
-    public MeleeWeapon(String name, String description){
-        super(name, description);
+    public MeleeWeapon(String name, String description, double damage){
+        super(name, description, damage);
     }
 
     @Override

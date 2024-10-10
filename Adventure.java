@@ -23,35 +23,24 @@ public class Adventure {
         return player.showInventory();
     }
 
-    public String commands(String command) {
-        switch (command.toLowerCase()) {
-            case "go north", "go east", "go west", "go south":
-                return player.move(command);
-            case "look":
-                return player.look();
-            case "help":
-                return getHelp();
-            default:
-                return "Unknown command. Type 'help' ";
-        }
+    public String eat(String item){
+        return player.eatItem(item);
     }
 
-    public String getHelp(){
-        return "Commands:\n"
-         + "'go north', 'go south', 'go east', 'go west' to move your character.\n"
-         + "'look' to look around\n"
-        + "'help' to get help";
-
-
-    }
-
-    public Player getPlayer() {
-        return player;
+    public String equip(String item) {
+        return player.equipWeapon(item);
     }
 
     public String attack() {
         return player.attack();
     }
+
+
+    public Player getPlayer() {
+        return player;
+    }
+
+
 
 }
 
